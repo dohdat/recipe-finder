@@ -1,0 +1,21 @@
+{
+    "name": "gette/recipe-finder",
+    "description": "Find out what to cook tonight based on what you have in your fridge",
+    "homepage": "http://github.com/gette/recipe-finder",
+    "authors": [
+        {
+            "name": "Guillermo Gette",
+            "email": "guillermogette@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/console": "2.6.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    },
+    "autoload": {
+        "psr-4": {"Recipe_Finder\\": "src/"}
+    }
+}
