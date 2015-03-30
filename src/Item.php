@@ -17,9 +17,19 @@ class Item
 		}
 	}
 
+	public function getName()
+	{
+		return $this->name;
+	}
+
 	public function setAmount($amount = 0)
 	{
 		$this->amount = floatval($amount);
+	}
+
+	public function getAmount()
+	{
+		return $this->amount;
 	}
 
 	public function setUnit($unit = "")
@@ -29,6 +39,11 @@ class Item
 		} else {
 			$this->unit = $unit;
 		}
+	}
+
+	public function getUnit()
+	{
+		return $this->unit;
 	}
 
 	public function setExpiration($expiration = "")
@@ -47,6 +62,10 @@ class Item
 				$this->expiration = $expiration_time;
 			}
 		}
-		
+	}
+
+	public function getExpiration()
+	{
+		return $this->expiration;
 	}
 }
