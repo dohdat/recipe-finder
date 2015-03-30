@@ -11,7 +11,7 @@ class Item
 	public function setName($name = "")
 	{
 		if (empty($name)) {
-			throw new Exception("Name can't be empty");
+			throw new \Exception("Name can't be empty");
 		} else {
 			$this->name = $name;
 		}
@@ -35,7 +35,7 @@ class Item
 	public function setUnit($unit = "")
 	{
 		if (empty($unit)) {
-			throw new Exception("Unit can't be empty");
+			throw new \Exception("Unit can't be empty");
 		} else {
 			$this->unit = $unit;
 		}
@@ -57,7 +57,7 @@ class Item
 			$expiration_time = strtotime($expiration_formatted);
 			if ($expiration_time === false) {
 				//there was a problem parsing this date
-				throw new Exception("Expiration date should be in the following format dd/mm/yyyy");
+				throw new \Exception("Expiration date should be in the following format dd/mm/yyyy");
 			} else {
 				$this->expiration = $expiration_time;
 			}
