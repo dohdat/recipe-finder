@@ -33,4 +33,14 @@ class ItemTest extends \PHPUnit_Framework_TestCase
 		$item->increaseAmount('5');
 		$this->assertEquals('15',$item->getAmount());
     }
+
+    /**
+     * @expectedException        \Exception
+     * @expectedExceptionMessage Unit can be only of, grams, ml or slices
+     */
+    public function testSetUnit()
+    {
+    	$item = new Recipe_Finder\Item();
+		$item->setUnit('asdas');
+    }
 }

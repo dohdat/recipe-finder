@@ -39,8 +39,8 @@ class Item
 
 	public function setUnit($unit = "")
 	{
-		if (empty($unit)) {
-			throw new \Exception("Unit can't be empty");
+		if (empty($unit) || !in_array($unit, array('of','grams','ml','slices'))) {
+			throw new \Exception("Unit can be only of, grams, ml or slices");
 		} else {
 			$this->unit = $unit;
 		}
