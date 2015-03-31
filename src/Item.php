@@ -27,6 +27,11 @@ class Item
 		$this->amount = floatval($amount);
 	}
 
+	public function increaseAmount($amount = 0)
+	{
+		$this->amount += floatval($amount);
+	}
+
 	public function getAmount()
 	{
 		return $this->amount;
