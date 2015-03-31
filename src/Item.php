@@ -48,6 +48,9 @@ class Item
 
 	public function setExpiration($expiration = "")
 	{
+		//this should be set in the php.ini
+		date_default_timezone_set('Australia/Sydney'); 
+
 		//we replace / for - so strtotime can understand d/m/y
 		if (empty($expiration)) {
 			//if expiration is empty we assume that the item is not going to expire any time soon

@@ -10,8 +10,6 @@ class ItemTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetExpiration()
 	{
-		date_default_timezone_set('Australia/Sydney'); 
-
 		$item = new Recipe_Finder\Item();
 		$item->setExpiration('30/03/2015');
 		$this->assertEquals('1427634000',$item->getExpiration());
@@ -23,8 +21,6 @@ class ItemTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetExpirationException()
     {
-        date_default_timezone_set('Australia/Sydney'); 
-
 		$item = new Recipe_Finder\Item();
 		$item->setExpiration('asdas/asdas/2015');
 		$item->getExpiration();
