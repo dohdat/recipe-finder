@@ -55,4 +55,18 @@ class Fridge
 	{
 		return $this->items;
 	}
+
+	public function has($item_name, $amount)
+	{
+		$hash = md5($item_name);
+		$amount = floatval($amount);
+		if (!isset($this->items[$hash])) {
+			return false;
+		}
+		$item = $this->items[$hash];
+		if ($item->getAmount() < $amount) {
+			return false;
+		}
+		return true;
+	}
 }
