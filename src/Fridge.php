@@ -15,7 +15,7 @@ class Fridge
 		if (count($data) > 0) {
 			foreach ($data as $line => $item_line) {
 				//unique id for each item to speed up search
-				$hash_id = md5($item_line[0]);
+				$hash_id = $this->itemHash($item_line[0]);
 				if (isset($this->items[$hash_id])) {
 					//item is in the fridge already
 					$this->items[$hash_id]->increaseAmount($item_line[1]);
@@ -33,6 +33,11 @@ class Fridge
 				}
 			}
 		}
+	}
+
+	public function itemHash($name)
+	{
+		return md5($name);
 	}
 
 	public function loadCSVData($file = "")
@@ -58,7 +63,7 @@ class Fridge
 
 	public function has($item_name, $amount)
 	{
-		$hash = md5($item_name);
+		$hash = $this->itemHash($item_name);
 		$amount = floatval($amount);
 		if (!isset($this->items[$hash])) {
 			return false;
