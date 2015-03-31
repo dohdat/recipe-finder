@@ -72,6 +72,14 @@ class Item
 		}
 	}
 
+	public function isExpired()
+	{
+		//this should be set in the php.ini
+		date_default_timezone_set('Australia/Sydney'); 
+
+		return $this->expiration < time();
+	}
+
 	public function getExpiration()
 	{
 		return $this->expiration;
