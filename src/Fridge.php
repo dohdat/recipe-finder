@@ -5,27 +5,36 @@ class Fridge
 {
 	protected $items = array();
 
-	public function loadFridge($file = "")
+	public function loadFridgeFile($file = "")
 	{
+		//set the index of the file in case format change
+		$index = array(
+			'name' => 0,
+			'amount' => 1,
+			'unit' => 2,
+			'expiration' => 3
+		);
+
 		if (empty($file)) {
 			throw new \Exception("Filename can't be empty");
 			return;
 		}
+
 		$data = $this->loadCSVData($file);
 		if (count($data) > 0) {
 			foreach ($data as $line => $item_line) {
 				//unique id for each item to speed up search
-				$hash_id = $this->itemHash($item_line[0]);
+				$hash_id = $this->itemHash($item_line[$index['name']]);
 				if (isset($this->items[$hash_id])) {
 					//item is in the fridge already
-					$this->items[$hash_id]->increaseAmount($item_line[1]);
+					$this->items[$hash_id]->increaseAmount($item_line[$index['amount']]);
 				} else {
 					try {
 						$item = new Item();
-						$item->setName($item_line[0]);
-						$item->setAmount($item_line[1]);
-						$item->setUnit($item_line[2]);
-						$item->setExpiration($item_line[3]);
+						$item->setName($item_line[$index['name']]);
+						$item->setAmount($item_line[$index['amount']]);
+						$item->setUnit($item_line[$index['unit']]);
+						$item->setExpiration($item_line[$index['expiration']]);
 						$this->items[$hash_id] = $item;
 					} catch (Exception $e) {
 						echo 'There was an error loading line '.$line.' '.$e->getMessage();
