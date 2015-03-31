@@ -15,6 +15,11 @@ class Recipe
 		}
 	}
 
+	public function getName()
+	{
+		return $this->name;
+	}
+
 	public function addIngredient($name = "", $amount = 0, $unit = "")
 	{
 		$item = new Item();
@@ -22,5 +27,10 @@ class Recipe
 		$item->setAmount($amount);
 		$item->setUnit($unit);
 		$this->ingredients[] = $item;
+	}
+
+	public function getIngredients()
+	{
+		return $this->ingredients;
 	}
 }
