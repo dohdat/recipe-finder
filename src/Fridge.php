@@ -14,15 +14,22 @@ class Fridge
 		$data = $this->loadCSVData($file);
 		if (count($data) > 0) {
 			foreach ($data as $line => $item_line) {
-				try {
-					$item = new Item();
-					$item->setName($item_line[0]);
-					$item->setAmount($item_line[1]);
-					$item->setUnit($item_line[2]);
-					$item->setExpiration($item_line[3]);
-					$this->items[] = $item;
-				} catch (Exception $e) {
-					echo 'There was an error loading line '.$line.' '.$e->getMessage();
+				//unique id for each item to speed up search
+				$hash_id = md5($item_line[0]);
+				if (isset($this->items[$hash_id])) {
+					//item is in the fridge already
+					$this->items[$hash_id]->increaseAmount($item_line[1]);
+				} else {
+					try {
+						$item = new Item();
+						$item->setName($item_line[0]);
+						$item->setAmount($item_line[1]);
+						$item->setUnit($item_line[2]);
+						$item->setExpiration($item_line[3]);
+						$this->items[$hash_id] = $item;
+					} catch (Exception $e) {
+						echo 'There was an error loading line '.$line.' '.$e->getMessage();
+					}
 				}
 			}
 		}

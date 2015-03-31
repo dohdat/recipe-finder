@@ -21,7 +21,7 @@ class FridgeTest extends \PHPUnit_Framework_TestCase
 		$item->setUnit('slices');
 		$item->setExpiration('25/12/2014');
 		$hash_id = md5('bread');
-		$items = array(0 => $item);
+		$items = array($hash_id => $item);
 		$this->assertEquals($items, $fridge->getItems());
 	}
 }
