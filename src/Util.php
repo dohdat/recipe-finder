@@ -1,8 +1,21 @@
 <?php
 namespace Recipe_Finder;
 
+/**
+ * Util
+ * Class with some utilities to handle the files data
+ *
+ * @author Guillermo Gette <guilermogette@gmail.com>
+ */
+
 class Util
 {
+	/**
+	 * Get the data inside the CSV file
+	 *
+	 * @param string $file the location of the CSV
+	 * @return array 
+	 */
 	static function getCSVData($file = "")
 	{
 		if (empty($file)) {
@@ -23,6 +36,12 @@ class Util
 		return $data;
 	}
 
+	/**
+	 * Get the data inside the JSON file
+	 *
+	 * @param string $file the location of the json file
+	 * @return array 
+	 */
 	static function getJsonData($file = "")
 	{
 		if (empty($file)) {

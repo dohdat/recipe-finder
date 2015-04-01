@@ -1,11 +1,22 @@
 <?php
 namespace Recipe_Finder;
 
+/**
+ * Fridge
+ * Class that has a collection of Items with some logic around if those items are available
+ *
+ * @author Guillermo Gette <guilermogette@gmail.com>
+ */
 class Fridge
 {
 	protected $items = array();
 	protected $load_errors = array();
 
+	/**
+	 * Load the fridge by a CSV file
+	 *
+	 * @param string $file the route to the file
+	 */
 	public function load($file = "")
 	{
 		//set the index of the file in case format change
@@ -40,21 +51,40 @@ class Fridge
 		}
 	}
 
+	/**
+	 * Create a hash for the item
+	 *
+	 * @param string $name
+	 * @return string
+	 */
 	public static function itemHash($name)
 	{
 		return md5($name);
 	}
 
+	/**
+	 * @return array
+	 */
 	public function getItems()
 	{
 		return $this->items;
 	}
 
+	/**
+	 * @return array
+	 */
 	public function getLoadErrors()
 	{
 		return $this->load_errors;
 	}
 
+	/**
+	 * Check if an element is available in the fridge (availability, amount, expiration)
+	 *
+	 * @param string $item_name
+	 * @param string $amount
+	 * @return string
+	 */
 	public function has($item_name, $amount)
 	{
 		$hash = $this->itemHash($item_name);

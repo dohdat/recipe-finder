@@ -1,6 +1,12 @@
 <?php
 namespace Recipe_Finder;
 
+/**
+ * Item
+ *
+ * @author Guillermo Gette <guilermogette@gmail.com>
+ */
+
 class Item
 {
 	protected $name;
@@ -8,6 +14,11 @@ class Item
 	protected $unit;
 	protected $expiration;
 
+	/**
+	 * Set name of the the item
+	 *
+	 * @param string $name
+	 */
 	public function setName($name = "")
 	{
 		if (empty($name)) {
@@ -17,26 +28,47 @@ class Item
 		}
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getName()
 	{
 		return $this->name;
 	}
 
+	/**
+	 * Set amount of items
+	 *
+	 * @param string/int $amount
+	 */
 	public function setAmount($amount = 0)
 	{
 		$this->amount = floatval($amount);
 	}
 
+	/**
+	 * Increase the amount of the item
+	 *
+	 * @param string/int $amount
+	 */
 	public function increaseAmount($amount = 0)
 	{
 		$this->amount += floatval($amount);
 	}
 
+	/**
+	 * @return float
+	 */
 	public function getAmount()
 	{
 		return $this->amount;
 	}
 
+	/**
+	 * Set the unit of the item
+	 *
+	 * @param string $unit
+	 */
 	public function setUnit($unit = "")
 	{
 		if (empty($unit) || !in_array($unit, array('of','grams','ml','slices'))) {
@@ -46,11 +78,19 @@ class Item
 		}
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getUnit()
 	{
 		return $this->unit;
 	}
 
+	/**
+	 * Set the expiration of the item
+	 *
+	 * @param string $expiration in the format dd/mm/yyyy
+	 */
 	public function setExpiration($expiration = "")
 	{
 		//this should be set in the php.ini
@@ -72,6 +112,9 @@ class Item
 		}
 	}
 
+	/**
+	 * @return boolean
+	 */
 	public function isExpired()
 	{
 		//this should be set in the php.ini
@@ -80,6 +123,9 @@ class Item
 		return $this->expiration < time();
 	}
 
+	/**
+	 * @return int
+	 */
 	public function getExpiration()
 	{
 		return $this->expiration;

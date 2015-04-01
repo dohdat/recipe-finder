@@ -7,6 +7,13 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * FinderCommand
+ * Setup the command using the Command component from Symfony
+ *
+ * @author Guillermo Gette <guilermogette@gmail.com>
+ */
+
 class FinderCommand extends Command
 {
     protected function configure()
@@ -92,6 +99,12 @@ class FinderCommand extends Command
         return;
     }
 
+    /**
+     * Setup an array of Recipe(s)
+     *
+     * @param array $recipe_list the json to array parsed from the file
+     * @return array of Recipe
+     */
     protected function setUpCookbook($recipes_list)
     {
         $recipes = array();
@@ -113,6 +126,13 @@ class FinderCommand extends Command
         return $recipes;
     }
 
+    /**
+     * If there are more than one suggestion here is the logic to pick one
+     *
+     * @param array $suggestion array of Recipe
+     * @param array $fridge_items array of Item
+     * @return Recipe
+     */
     protected function getTopSuggestion($suggestions, $fridge_items)
     {
         $necessary_ingredients = array();
