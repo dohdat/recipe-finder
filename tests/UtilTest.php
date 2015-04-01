@@ -16,7 +16,7 @@ class UtilTest extends \PHPUnit_Framework_TestCase
 		$util = new Recipe_Finder\Util();
 		$data = array(
 			array(
-				'name' => 'grilledcheeseontoast',
+				'name' => 'grilled cheese on toast',
 				'ingredients' => array(
 					array(
 						'item' => 'bread',

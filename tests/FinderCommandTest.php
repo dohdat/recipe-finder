@@ -15,10 +15,10 @@ class FinderCommandTest extends \PHPUnit_Framework_TestCase
         $setUpCookbook->setAccessible(true);
         
         $recipe = new Recipe();
-        $recipe->setName('grilledcheeseontoast');
+        $recipe->setName('grilled cheese on toast');
         $recipe->addIngredient('bread', '2', 'slices');
         $data = array($recipe);
-        
+
         $this->assertEquals($data, $setUpCookbook->invokeArgs(new FinderCommand, array($recipe_list)));
     }
 }
