@@ -40,7 +40,7 @@ class Fridge
 		}
 	}
 
-	public function itemHash($name)
+	public static function itemHash($name)
 	{
 		return md5($name);
 	}
