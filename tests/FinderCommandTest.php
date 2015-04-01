@@ -77,7 +77,7 @@ class FinderCommandTest extends \PHPUnit_Framework_TestCase
         $commandTester = new CommandTester($command);
         $commandTester->execute(array(
             'command' => $command->getName(),
-            'fridge_file' => 'fridge.csv',
+            'fridge_file' => __DIR__.'/fridge.csv',
             'recipes_file' => 'recipes.json',
         ));
 
