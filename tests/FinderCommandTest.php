@@ -68,7 +68,7 @@ class FinderCommandTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Recipe_Finder\Recipe',$getTopSuggestion->invokeArgs(new FinderCommand, array($suggestions, $fridge_items)));
     }
 
-    public function testNameIsOutput()
+    public function testRightRecipe()
     {
         $application = new Application();
         $application->add(new FinderCommand());
@@ -77,7 +77,7 @@ class FinderCommandTest extends \PHPUnit_Framework_TestCase
         $commandTester = new CommandTester($command);
         $commandTester->execute(array(
             'command' => $command->getName(),
-            'fridge_file' => __DIR__.'/fridge.csv',
+            'fridge_file' => 'fridge.csv',
             'recipes_file' => 'recipes.json',
         ));
 

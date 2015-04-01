@@ -1,9 +1,11 @@
 <?php
+use Recipe_Finder\Util;
+
 class UtilTest extends \PHPUnit_Framework_TestCase
 {
 	function testGetCSVData()
 	{
-		$util = new Recipe_Finder\Util();
+		$util = new Util();
 		$data = array(
 			array("bread","10","slices","25/07/2015")
 		);
@@ -13,7 +15,7 @@ class UtilTest extends \PHPUnit_Framework_TestCase
 
 	function testGetJsonData()
 	{
-		$util = new Recipe_Finder\Util();
+		$util = new Util();
 		$data = array(
 			array(
 				'name' => 'grilled cheese on toast',
