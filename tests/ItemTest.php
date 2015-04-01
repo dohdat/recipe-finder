@@ -17,7 +17,7 @@ class ItemTest extends \PHPUnit_Framework_TestCase
 
 	/**
      * @expectedException        \Exception
-     * @expectedExceptionMessage Expiration date should be in the following format dd/mm/yyyy
+     * @expectedExceptionMessage Item expiration date should be in the following format dd/mm/yyyy
      */
     public function testSetExpirationException()
     {
@@ -45,7 +45,7 @@ class ItemTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException        \Exception
-     * @expectedExceptionMessage Unit can be only of, grams, ml or slices
+     * @expectedExceptionMessage Item unit can be only of, grams, ml or slices
      */
     public function testSetUnit()
     {
