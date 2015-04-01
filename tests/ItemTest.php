@@ -31,6 +31,8 @@ class ItemTest extends \PHPUnit_Framework_TestCase
 		$item = new Recipe_Finder\Item();
 		$item->setExpiration('01/01/2015');
 		$this->assertEquals(true, $item->isExpired());
+		$item->setExpiration('01/01/2016');
+		$this->assertEquals(false, $item->isExpired());
 	}
 
     public function testIncreaseAmount()

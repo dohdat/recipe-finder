@@ -5,7 +5,7 @@ class Fridge
 {
 	protected $items = array();
 
-	public function loadFridgeFile($file = "")
+	public function load($file = "")
 	{
 		//set the index of the file in case format change
 		$index = array(
@@ -20,7 +20,7 @@ class Fridge
 			return;
 		}
 
-		$data = $this->loadCSVData($file);
+		$data = Util::getCSVData($file);
 		if (count($data) > 0) {
 			foreach ($data as $line => $item_line) {
 				//unique id for each item to speed up search
@@ -49,22 +49,6 @@ class Fridge
 		return md5($name);
 	}
 
-	public function loadCSVData($file = "")
-	{
-		$file_handle = fopen($file, "r");
-		if ($file_handle === false) {
-			throw new \Exception("The file couldn't be open");
-			return;
-		}
-		$data = array();
-		while ($line = fgetcsv($file_handle)) {
-			$data[] = $line;
-		}
-		fclose($file_handle);
-
-		return $data;
-	}
-
 	public function getItems()
 	{
 		return $this->items;
@@ -79,6 +63,9 @@ class Fridge
 		}
 		$item = $this->items[$hash];
 		if ($item->getAmount() < $amount) {
+			return false;
+		}
+		if ($item->isExpired()) {
 			return false;
 		}
 		return true;
