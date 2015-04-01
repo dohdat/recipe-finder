@@ -28,19 +28,24 @@ class FinderCommand extends Command
             $recipes_list = Util::getJsonData($input->getArgument('recipes_file'));
         } catch(\Exception $e) {
             $output->writeln('<error>'.$e->getMessage().'</error>');
+            //big error
             return;
         }
 
-        if (count($frige->getItems()) == 0) {
-            $output->writeln('Your fridge is empty! Order take out');
-            return;
-        }
-        if (count($recipes_list) == 0) {
-            $output->writeln('No recipes, no suggestions! Order take out');
+        if (count($fridge->getItems()) == 0) {
+            $output->writeln('Your fridge is empty! Order Takeout');
+            //nothing else to do
             return;
         }
 
-        //show any error while loading the fridge
+        $cookbook = $this->setUpCookbook($recipes_list);
+        if (count($cookbook) == 0) {
+            $output->writeln('No recipes, no suggestions! Order Takeout');
+            //nothing else to do
+            return;
+        }
+
+        //show any error while loading the fridge, we continue running anyways
         if (count($fridge->getLoadErrors()) > 0) {
             $errors = $fridge->getLoadErrors();
             foreach ($errors as $error) {
@@ -48,7 +53,43 @@ class FinderCommand extends Command
             }
         }
 
-        $output->writeln('all good');
+        $suggestions = array();
+        foreach ($cookbook as $recipe) {
+            //Recipe $recipe
+            $ingredients = $recipe->getIngredients();
+            $we_have_ingredients = true;
+            foreach ($ingredients as $ingredient) {
+                //Item $ingredient
+                if (!$fridge->has($ingredient->getName(), $ingredient->getAmount())) {
+                    //we dont have / expired / not enough  ingredient in the fridge
+                    //lets go to the next recipe
+                    $we_have_ingredients = false;
+                    break;
+                }
+            }
+            if ($we_have_ingredients) {
+                $suggestions[] = $recipe;
+            }
+            
+        }
+
+        if (count($suggestions) == 0){
+            //no suggestions
+            $output->writeln('Order Takeout');
+            return;
+        }
+
+        if (count($suggestions) == 1){
+            //no suggestions
+            $recipe = $suggestions[0];
+            $output->writeln('You can prepare '.$recipe->getName());
+            return;
+        }
+
+        //we have more than 1 suggesion so we need to pick one by expiration of the ingredients
+        $recipe = $this->getTopSuggestion($suggestions, $fridge_items);
+        $output->writeln('You can prepare '.$recipe->getName());
+        return;
     }
 
     protected function setUpCookbook($recipes_list)
@@ -70,5 +111,27 @@ class FinderCommand extends Command
             }
         }
         return $recipes;
+    }
+
+    protected function getTopSuggestion($suggestions, $fridge_items)
+    {
+        $necessary_ingredients = array();
+        foreach ($suggestions as $recipe_index => $recipe) {
+            $ingredients = $recipe->getIngredients();
+            foreach ($ingredients as $ingredient) {
+                $expiration = $fridge_items[Fridge::itemHash($ingredient->getName())]->getExpiration();
+                $necessary_ingredients[$expiration][] = $recipe_index;
+            }
+        }
+        ksort($necessary_ingredients);
+        $top_recipes = reset($necessary_ingredients);
+
+        if (count($top_recipes) == 1) {
+            return $suggestions[$top_recipes[0]];
+        } else {
+            //we have 2 or more recipes with the same ingredient
+            $possible_indexes = count($top_recipes)-1;
+            return $suggestions[$top_recipes[rand(0, $possible_indexes)]];
+        }
     }
 }
