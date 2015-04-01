@@ -9,7 +9,7 @@ class Util
 			throw new \Exception("Filename can't be empty");
 			return;
 		}
-		$file_handle = fopen($file, "r");
+		$file_handle = @fopen($file, "r");
 		if ($file_handle === false) {
 			throw new \Exception("The file couldn't be open");
 			return;
