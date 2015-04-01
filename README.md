@@ -2,7 +2,7 @@
 By providing a CSV file with the items in your fridge and a list of recipes we can suggest you what can you cook tonight. Check out the examples files in the repository.
 
 ## Requirements
-- PHP 5.3.3
+- PHP > 5.3.3
 
 ## Installation
 1. $ git clone git@github.com:guillegette/recipe-finder.git
