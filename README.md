@@ -16,3 +16,9 @@ $ php recipe-finder find path/to/fridge.csv path/to/recipes.json
 
 ## Help?
 $ php recipe-finder help 
+
+## Assumptions (edge cases)
+- An item with no expiration it will never expires
+- If the item is repeated (by name) in the fridge.csv we increase the amount
+- If there is a recipe with no ingredients we ignore it
+- If 2 recipes share the item with the closest expiration date we pick one using rand()
