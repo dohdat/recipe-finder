@@ -77,8 +77,8 @@ class FinderCommandTest extends \PHPUnit_Framework_TestCase
         $commandTester = new CommandTester($command);
         $commandTester->execute(array(
             'command' => $command->getName(),
-            'fridge_file' => 'fridge.csv',
-            'recipes_file' => 'recipes.json',
+            'fridge_file' => dirname(__DIR__).'/fridge.csv',
+            'recipes_file' => dirname(__DIR__).'/recipes.json',
         ));
 
         $this->assertRegExp('/You can prepare salad sandwich/', $commandTester->getDisplay());
