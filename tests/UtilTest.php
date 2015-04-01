@@ -10,4 +10,23 @@ class UtilTest extends \PHPUnit_Framework_TestCase
 		$file_data = $util::getCSVData('tests/fridge.csv');
 		$this->assertEquals($data, $file_data);
 	}
+
+	function testGetJsonData()
+	{
+		$util = new Recipe_Finder\Util();
+		$data = array(
+			array(
+				'name' => 'grilledcheeseontoast',
+				'ingredients' => array(
+					array(
+						'item' => 'bread',
+						'amount' => '2',
+						'unit' => 'slices'
+					)
+				)
+			)
+		);
+		$file_data = $util::getJsonData('tests/recipes.json');
+		$this->assertEquals($data, $file_data);
+	}
 }
