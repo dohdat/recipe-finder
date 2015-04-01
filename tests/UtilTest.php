@@ -9,7 +9,7 @@ class UtilTest extends \PHPUnit_Framework_TestCase
 		$data = array(
 			array("bread","10","slices","25/07/2015")
 		);
-		$file_data = $util::getCSVData('tests/fridge.csv');
+		$file_data = $util::getCSVData(__DIR__.'/fridge.csv');
 		$this->assertEquals($data, $file_data);
 	}
 
@@ -28,7 +28,7 @@ class UtilTest extends \PHPUnit_Framework_TestCase
 				)
 			)
 		);
-		$file_data = $util::getJsonData('tests/recipes.json');
+		$file_data = $util::getJsonData(__DIR__.'/recipes.json');
 		$this->assertEquals($data, $file_data);
 	}
 }
