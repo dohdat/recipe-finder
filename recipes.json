@@ -1,6 +1,6 @@
 [
     {
-        "name":"grilledcheeseontoast",
+        "name":"grilled cheese on toast",
         "ingredients":[
             {
                 "item":"bread",
@@ -15,7 +15,7 @@
         ]
     },
     {
-        "name":"saladsandwich",
+        "name":"salad sandwich",
         "ingredients":[
             {
                 "item":"bread",
@@ -23,7 +23,7 @@
                 "unit":"slices"
             },
             {
-                "item":"mixedsalad",
+                "item":"mixed salad",
                 "amount":"200",
                 "unit":"grams"
             }
