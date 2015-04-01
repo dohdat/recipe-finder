@@ -14,12 +14,6 @@ class Fridge
 			'unit' => 2,
 			'expiration' => 3
 		);
-
-		if (empty($file)) {
-			throw new \Exception("Filename can't be empty");
-			return;
-		}
-
 		$data = Util::getCSVData($file);
 		if (count($data) > 0) {
 			foreach ($data as $line => $item_line) {
