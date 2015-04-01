@@ -30,7 +30,7 @@ class Fridge
 						$item->setUnit($item_line[$index['unit']]);
 						$item->setExpiration($item_line[$index['expiration']]);
 						$this->items[$hash_id] = $item;
-					} catch (Exception $e) {
+					} catch (\Exception $e) {
 						echo 'There was an error loading line '.$line.' '.$e->getMessage();
 					}
 				}
