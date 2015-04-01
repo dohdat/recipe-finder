@@ -4,6 +4,7 @@ namespace Recipe_Finder;
 class Fridge
 {
 	protected $items = array();
+	protected $load_errors = array();
 
 	public function load($file = "")
 	{
@@ -31,7 +32,8 @@ class Fridge
 						$item->setExpiration($item_line[$index['expiration']]);
 						$this->items[$hash_id] = $item;
 					} catch (\Exception $e) {
-						echo 'There was an error loading line '.$line.' '.$e->getMessage();
+						//save this in an array so we can control the output in the console
+						$this->load_errors[] = "Line {$line} of {$file} couldn't be loaded: ".$e->getMessage();
 					}
 				}
 			}
@@ -46,6 +48,11 @@ class Fridge
 	public function getItems()
 	{
 		return $this->items;
+	}
+
+	public function getLoadErrors()
+	{
+		return $this->load_errors;
 	}
 
 	public function has($item_name, $amount)
