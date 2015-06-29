@@ -22,3 +22,17 @@ $ php recipe-finder help
 - If the item is repeated (by name) in the fridge.csv we increase the amount
 - If there is a recipe with no ingredients we ignore it
 - If 2 recipes share the item with the closest expiration date we pick one using rand()
+
+## TODO
+- Increate test coverage
+- The setter methods, specially for strings, need to be refactor to consider more types of variables
+```php
+public function setName($name = "")
+{
+	$name = trim($name);
+	if (empty($name) || !is_string($name)) {
+		throw new \Exception("Item must be a string and can't empty");
+	}
+	$this->name = $name;
+}
+```
